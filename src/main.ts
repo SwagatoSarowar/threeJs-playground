@@ -30,15 +30,13 @@ const earthGeometry = new THREE.SphereGeometry(10, 64, 64);
 const earthTexture = new THREE.TextureLoader().load(earthImg);
 const earthMaterial = new THREE.MeshStandardMaterial({ map: earthTexture });
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+earth.rotation.z = Math.PI / 5;
+earth.rotation.reorder("ZYX");
 scene.add(earth);
-
-// Earth Axis
-const axis = new THREE.Vector3(-1, 1, 0).normalize();
-const angle = 0.1 * (Math.PI / 180);
 
 // Animate
 function animate() {
-  earth.rotateOnAxis(axis, angle);
+  earth.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
 

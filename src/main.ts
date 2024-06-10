@@ -34,14 +34,16 @@ earth.rotation.z = Math.PI / 5;
 earth.rotation.reorder("ZYX");
 scene.add(earth);
 
-// Animate
-function animate() {
-  earth.rotation.y += 0.01;
-  renderer.render(scene, camera);
-}
-
 // Renderer
 const canvas = document.querySelector("#webgl") as HTMLCanvasElement;
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setAnimationLoop(animate);
+
+// Animation
+function animate() {
+  earth.rotation.y += 0.01;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
+animate();
